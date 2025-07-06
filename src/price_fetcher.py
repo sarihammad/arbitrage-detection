@@ -24,13 +24,31 @@ def fetch_binance_rates(assets=None):
     if assets is None:
         assets = ["BTC", "ETH", "USDT"]
 
-    response = requests.get("https://api.binance.com/api/v3/ticker/price")
-    tickers = response.json()
+    url = "https://api.binance.com/api/v3/ticker/price"
+
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        tickers = response.json()
+
+        if not isinstance(tickers, list) or not all(isinstance(item, dict) for item in tickers):
+            raise ValueError("Unexpected API response format")
+
+    except Exception as e:
+        raise RuntimeError(f"Binance API error: {e}")
 
     rates = defaultdict(dict)
     for item in tickers:
-        symbol = item["symbol"]
-        price = float(item["price"])
+        symbol = item.get("symbol")
+        price_str = item.get("price")
+
+        if not symbol or not price_str:
+            continue
+
+        try:
+            price = float(price_str)
+        except ValueError:
+            continue
 
         for base in assets:
             for quote in assets:
