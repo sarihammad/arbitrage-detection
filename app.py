@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 from src.arbitrage_finder import find_arbitrage
-from src.price_fetcher import fetch_binance_rates
+from src.price_fetcher import fetch_coingecko_rates
 from src.slippage_model import apply_slippage
 
 
@@ -12,7 +12,7 @@ mode = st.radio("Select input mode", ["Live from Binance", "Manual JSON input"])
 if mode == "Live from Binance":
     with st.spinner("Fetching live rates..."):
         try:
-            rates = fetch_binance_rates(["BTC", "ETH", "USDT"])
+            rates = fetch_coingecko_rates(["BTC", "ETH", "USDT"])
         except Exception as e:
             st.error(f"Failed to fetch live rates: {e}")
             st.stop()
