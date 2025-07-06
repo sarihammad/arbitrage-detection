@@ -11,11 +11,18 @@ mode = st.radio("Select input mode", ["Live from Binance", "Manual JSON input"])
 
 if mode == "Live from Binance":
     with st.spinner("Fetching live rates..."):
-        rates = fetch_binance_rates(["BTC", "ETH", "USDT"])
+        try:
+            rates = fetch_binance_rates(["BTC", "ETH", "USDT"])
+        except Exception as e:
+            st.error(f"Failed to fetch live rates: {e}")
+            st.stop()
     slippage_pct = st.slider("Slippage Percentage", 0.0, 5.0, 1.0, step=0.1) / 100.0
     for base in rates:
-        for quote in rates[base]:
-            rates[base][quote] = apply_slippage(rates[base][quote], slippage_pct)
+        for quote in list(rates[base]):
+            try:
+                rates[base][quote] = apply_slippage(rates[base][quote], slippage_pct)
+            except Exception:
+                del rates[base][quote]
     st.write("Exchange Rates", rates)
     if st.button("Detect Arbitrage"):
         cycle = find_arbitrage(rates)
