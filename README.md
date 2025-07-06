@@ -2,6 +2,10 @@
 
 A real-time cryptocurrency arbitrage detection system that identifies profitable trading cycles across currency pairs using graph algorithms and live exchange rate data from Binance.
 
+## Live Demo
+
+https://crypto-arbitrage-detection.streamlit.app/
+
 ## Features
 
 - Fetches **real-time exchange rates** from Binance for selected cryptocurrencies (e.g., BTC, ETH, USDT).
@@ -9,6 +13,7 @@ A real-time cryptocurrency arbitrage detection system that identifies profitable
 - Applies the **Bellman-Ford algorithm** to detect **negative-weight cycles**, which represent arbitrage opportunities.
 - Simulates **slippage** by modeling market depth, price impact, and order book behavior to assess the real-world feasibility of arbitrage trades.
 - Presents the results in an interactive **Streamlit web interface**:
+
     - Choose between **Live Binance Data** or **Manual Input**
     - Display of input rates and arbitrage paths
     - Clear success/failure results
@@ -31,14 +36,12 @@ The system evaluates combinations like `BTC -> ETH -> USDT -> BTC` to find profi
 
 ## How to Run
 
-Launch the Streamlit app:
+To run the app locally:
 
-```bash
-streamlit run app/streamlit_app.py
-```
+1. Clone the repository.
+2. Install the required dependencies (see `requirements.txt`).
+3. Start the Streamlit app:
 
-Features:
-
-- Choose between **Live Binance Data** or **Manual Input**
-- Display of input rates and arbitrage paths
-- Clear success/failure results
+  ```bash
+  streamlit run app.py
+  ```
