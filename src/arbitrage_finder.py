@@ -5,8 +5,8 @@ This module integrates the graph builder and Bellman-Ford algorithm to detect ar
 in a set of currency exchange rates.
 """
 
-from graph_builder import build_exchange_graph
-from bellman_ford import detect_arbitrage
+from src.graph_builder import build_exchange_graph
+from src.bellman_ford import detect_arbitrage
 
 def find_arbitrage(rates):
     """
