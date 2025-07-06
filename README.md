@@ -6,6 +6,8 @@ A real-time cryptocurrency arbitrage detection system that identifies profitable
 
 https://crypto-arbitrage-detection.streamlit.app/
 
+<img width="1440" alt="Screenshot 2025-07-06 at 4 37 17 pm" src="https://github.com/user-attachments/assets/ab9b9645-d433-4b90-ba62-7692d072b3ab" />
+
 ## Features
 
 - Fetches **real-time exchange rates** from Binance for selected cryptocurrencies (e.g., BTC, ETH, USDT).
